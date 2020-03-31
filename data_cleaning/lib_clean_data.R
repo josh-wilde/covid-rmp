@@ -50,3 +50,14 @@ clean_cdc_atlas <- function(fpath, fname) {
     select(fips, everything())
 }
 
+#####
+# Kaiser
+#####
+
+clean_kaiser_xl <- function(fpath, fname) {
+  read_excel(file.path(fpath, fname)) %>%
+    clean_names() %>% # clean the column names
+    mutate(fips = as.numeric(cnty_fips)) %>% 
+    select(cnty_fips, fips, everything()) 
+}
+

@@ -69,3 +69,15 @@ clean_cdc_atlas(fpath = file.path(data_dir, 'CDC Heart Atlas Data Files'),
 clean_cdc_atlas(fpath = file.path(data_dir, 'CDC Heart Atlas Data Files'),
                 fname = 'hdatlas_urban_rural.csv') %>% 
   write_csv(file.path(clean_path, 'cdc_atlas_urban.csv'))
+
+#####
+# Kaiser
+#####
+
+# ICU beds, 60+ people per ICU bed
+clean_kaiser_xl(fpath = file.path(data_dir, 'Kaiser Health'),
+                fname = 'KHN_ICU_bed_county_analysis_2.xlsx') %>% 
+  write_csv(file.path(clean_path, 'kaiser_icu.csv'))
+
+
+
