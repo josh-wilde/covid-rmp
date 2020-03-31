@@ -8,3 +8,4 @@ data-directory.txt
 # R projects
 ./.Rproj.user
 *.Rproj
+.Rhistory

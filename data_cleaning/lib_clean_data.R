@@ -7,18 +7,25 @@ source('config.R')
 #####
 
 clean_csse_ts <- function(fpath, fname, col_name){
+  by_state_col <- paste0(col_name, '_by_state')
+  
   read_csv(file.path(fpath, fname)) %>%
     clean_names() %>% # clean the column names
-    select(fips, matches('x\\d{1,2}_\\d{1,2}_\\d{1,2}')) %>% 
-    pivot_longer(cols = -fips, 
+    select(uid, fips, state=province_state, matches('x\\d{1,2}_\\d{1,2}_\\d{1,2}')) %>% 
+    pivot_longer(cols = matches('x\\d{1,2}_\\d{1,2}_\\d{1,2}'), 
                  names_to = 'date', 
                  values_to = col_name) %>% 
-    group_by(fips) %>% 
+    group_by(uid, fips, state) %>% 
     summarise(!!col_name := sum(!!sym(col_name))) %>% 
-    mutate(fips = as.numeric(fips)) %>% 
-    filter(fips >= 1000 & fips < 80000) # excludes cruises, KC, Nantucket, couple "out of" areas, and islands/territories
-    
+    ungroup() %>% 
+    group_by(state) %>% 
+    mutate(!!by_state_col := sum(!!sym(col_name))) %>% 
+    ungroup() %>% 
+    mutate(fips = as.numeric(fips))
 }
+
+
+
 
 #####
 # Claritas

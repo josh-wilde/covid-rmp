@@ -21,6 +21,11 @@ clean_csse_ts(fpath = file.path(data_dir, 'COVID-19', 'csse_covid_19_data', 'css
               col_name = 'covid_cumul_cases')  %>% 
   write_csv(file.path(clean_path, 'covid_cumul_confirmed.csv'))
 
+# Lookup table for FIPS
+read_csv(file.path(data_dir, 'COVID-19', 'csse_covid_19_data', 'UID_ISO_FIPS_LookUp_Table.csv')) %>% 
+  clean_names() %>% 
+  write_csv(file.path(clean_path, 'covid_geo_lookup.csv'))
+
 #####
 # Claritas
 #####
