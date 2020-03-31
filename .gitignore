@@ -1,0 +1,10 @@
+# Individual data directory
+data-directory.txt
+.Rproj.user
+
+# DS_Store
+.DS_Store
+
+# R projects
+./.Rproj.user
+*.Rproj
